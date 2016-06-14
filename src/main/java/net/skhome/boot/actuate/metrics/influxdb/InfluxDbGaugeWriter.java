@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * A {@link GaugeWriter} for the InfluxDB time series database.
  *
- * @author Sascha Krueger
+ * @author Sascha Krüger
  */
 @CommonsLog
 public class InfluxDbGaugeWriter implements GaugeWriter {
