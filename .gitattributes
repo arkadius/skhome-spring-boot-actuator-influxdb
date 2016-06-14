@@ -1,0 +1,15 @@
+# set default behaviour, in case users don't have core.autocrlf set.
+text=auto
+
+# Gradle Wrapper files must always have correct line endings
+gradlew.bat text eol=crlf
+gradlew     text eol=lf
+
+# Shell scripts with Unix file endings
+*.sh text eol=lf
+
+# denote all files that are truly binary and that should not be modified
+*.png binary
+*.jpg binary
+*.gif binary
+*.jar binary
