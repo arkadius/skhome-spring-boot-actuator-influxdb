@@ -1,9 +1,8 @@
 package net.skhome.boot.actuate.metrics.autoconfigure;
 
-import kn.freightnet.boot.actuate.metrics.influxdb.InfluxDbGaugeWriter;
+import net.skhome.boot.actuate.metrics.influxdb.InfluxDbGaugeWriter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

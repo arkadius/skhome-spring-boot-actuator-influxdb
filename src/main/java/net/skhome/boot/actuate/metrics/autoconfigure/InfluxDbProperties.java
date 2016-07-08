@@ -1,15 +1,13 @@
 package net.skhome.boot.actuate.metrics.autoconfigure;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.influxdb.InfluxDB.LogLevel;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.influxdb.InfluxDB.LogLevel;
-
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
-import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @Setter
