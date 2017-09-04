@@ -36,6 +36,8 @@ public class InfluxDbProperties {
      */
     private String database = "aTimeSeries";
 
+    private String retentionPolicy = "autogen";
+
     private BatchMode batch;
 
     /**
@@ -54,7 +56,7 @@ public class InfluxDbProperties {
          * Whether batch mode should be enabled.
          * This might increase performance and lower the number of calls to InfluxDB.
          */
-        private boolean enabled = false;
+        private boolean enabled = true;
 
         /**
          * The number of metrics to be accumulated before they are written to InfluxDB.

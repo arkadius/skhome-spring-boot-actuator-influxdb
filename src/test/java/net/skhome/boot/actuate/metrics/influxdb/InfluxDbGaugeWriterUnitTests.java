@@ -38,27 +38,27 @@ public class InfluxDbGaugeWriterUnitTests {
 
     @Before
     public void prepareWriter() {
-        writer = new InfluxDbGaugeWriter(influxDB, "database");
+        writer = new InfluxDbGaugeWriter(influxDB, "database", "default");
     }
 
     @Test
     public void rejectsMissingInfluxDB() {
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("The parameter influxDB may not be null.");
-        new InfluxDbGaugeWriter(null, "database");
+        new InfluxDbGaugeWriter(null, "database", "default");
     }
 
     @Test
     public void rejectsMissingDatabaseName() {
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("The parameter databaseName may not be null.");
-        new InfluxDbGaugeWriter(influxDB, null);
+        new InfluxDbGaugeWriter(influxDB, null, "default");
     }
 
     @Test
     public void createsDatabase() {
         final String databaseName = "customDatabase";
-        new InfluxDbGaugeWriter(influxDB, databaseName);
+        new InfluxDbGaugeWriter(influxDB, databaseName, "default");
         verify(influxDB).createDatabase(databaseName);
     }
 

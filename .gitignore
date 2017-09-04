@@ -3,6 +3,7 @@
 
 # IDEA IDE
 .idea/
+*.iml
 
 # Eclipse IDE
 .metadata/
@@ -18,3 +19,4 @@ RemoteSystemsTempFiles/
 # Gradle
 .gradle/
 build/
+out

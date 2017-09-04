@@ -23,17 +23,20 @@ public class InfluxDbGaugeWriter implements GaugeWriter {
 
     private final InfluxDB influxDB;
     private final String databaseName;
+    private final String retentionPolicy;
     private boolean isInitialized = false;
 
     @Getter
     private Map<String, String> tags = new HashMap<>();
 
-    public InfluxDbGaugeWriter(final InfluxDB influxDB, final String databaseName) {
+    public InfluxDbGaugeWriter(final InfluxDB influxDB, final String databaseName, final String retentionPolicy) {
         Assert.notNull(influxDB, "The parameter influxDB may not be null.");
         Assert.notNull(databaseName, "The parameter databaseName may not be null.");
+        Assert.notNull(retentionPolicy, "The parameter retentionPolicy may not be null.");
 
         this.influxDB = influxDB;
         this.databaseName = databaseName;
+        this.retentionPolicy = retentionPolicy;
         this.initializeDatabase();
     }
 
@@ -86,7 +89,7 @@ public class InfluxDbGaugeWriter implements GaugeWriter {
                     .tag(tags)
                     .build();
             try {
-                influxDB.write(databaseName, "default", point);
+                influxDB.write(databaseName, retentionPolicy, point);
             } catch (Exception ex) {
                 log.warn("Could not write metric '" + value.toString() + "' to InfluxDB. Cause: " + ex.getMessage());
             }

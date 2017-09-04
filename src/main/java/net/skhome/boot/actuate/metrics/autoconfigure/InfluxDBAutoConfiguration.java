@@ -33,7 +33,7 @@ public class InfluxDBAutoConfiguration {
     @ExportMetricWriter
     @ConditionalOnMissingBean(InfluxDbGaugeWriter.class)
     public InfluxDbGaugeWriter influxDbWriter() {
-        final InfluxDbGaugeWriter writer = new InfluxDbGaugeWriter(influxDB(), properties.getDatabase());
+        final InfluxDbGaugeWriter writer = new InfluxDbGaugeWriter(influxDB(), properties.getDatabase(), properties.getRetentionPolicy());
         final InfluxDbProperties.BatchMode batchMode = properties.getBatch();
         if ((batchMode != null) && (batchMode.isEnabled())) {
             writer.enableBatch(batchMode.getActions(), batchMode.getFlushDuration(), TimeUnit.MILLISECONDS);
