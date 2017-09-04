@@ -83,7 +83,7 @@ public class InfluxDbGaugeWriter implements GaugeWriter {
     public void set(final Metric<?> value) {
         this.initializeDatabase();
         if (isInitialized) {
-            final Point point = Point.measurement(value.getName())
+            final Point point = ActuatorPointExtractor.extract(value)
                     .time(value.getTimestamp().getTime(), TimeUnit.MILLISECONDS)
                     .addField("value", value.getValue())
                     .tag(tags)

@@ -140,4 +140,40 @@ public class InfluxDbGaugeWriterUnitTests {
         PointAssert.assertThat(pointCaptor.getValue()).hasTagWithValue("application.properties", "test-service");
     }
 
+    @Test
+    public void writeStatusWithServiceAndCodeIdInTag() {
+        // given
+        final Metric<Integer> metric = new Metric<>("counter.status.200.Examples", 5);
+        // when
+        writer.set(metric);
+        // then
+        verify(influxDB).write(anyString(), anyString(), pointCaptor.capture());
+        PointAssert.assertThat(pointCaptor.getValue()).hasTagWithValue("service", "Examples");
+        PointAssert.assertThat(pointCaptor.getValue()).hasTagWithValue("code", "200");
+        PointAssert.assertThat(pointCaptor.getValue()).hasMeasurement("counter.status");
+    }
+
+    @Test
+    public void writeResponseWithServiceIdInTag() {
+        // given
+        final Metric<Integer> metric = new Metric<>("gauge.response.Examples", 5);
+        // when
+        writer.set(metric);
+        // then
+        verify(influxDB).write(anyString(), anyString(), pointCaptor.capture());
+        PointAssert.assertThat(pointCaptor.getValue()).hasTagWithValue("service", "Examples");
+        PointAssert.assertThat(pointCaptor.getValue()).hasMeasurement("gauge.response");
+    }
+
+    @Test
+    public void writeResponseWithServiceIdWithMultiplePartsInTag() {
+        // given
+        final Metric<Integer> metric = new Metric<>("gauge.response.Foo.Bar", 5);
+        // when
+        writer.set(metric);
+        // then
+        verify(influxDB).write(anyString(), anyString(), pointCaptor.capture());
+        PointAssert.assertThat(pointCaptor.getValue()).hasTagWithValue("service", "Foo.Bar");
+        PointAssert.assertThat(pointCaptor.getValue()).hasMeasurement("gauge.response");
+    }
 }
